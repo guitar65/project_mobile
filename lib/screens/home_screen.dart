@@ -1,7 +1,5 @@
 import 'package:account/provider/transaction_provider.dart';
 import 'package:account/screens/edit_screen.dart';
-import 'package:account/screens/edit_screen.dart.bak';
-import 'package:account/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -19,18 +17,46 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text("แอพบัญชี"),
+          backgroundColor: Colors.black,
+          elevation: 0,
+          leading: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          title: const Text(
+            "Hello Friend",
+            style: TextStyle(
+                fontFamily: "Arial",
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.red),
+          ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.exit_to_app),
+              icon: const Icon(
+                Icons.notifications,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
               onPressed: () {
                 SystemNavigator.pop();
               },
             ),
           ],
         ),
-        body: Consumer(
+        body: Consumer<TransactionProvider>(
+          child: Image.network(
+            'https://pbs.twimg.com/media/GBxNQk2a8AAAWk3?format=jpg&name=4096x4096', // ใส่ URL รูปโปรไฟล์ที่ต้องการ
+            fit: BoxFit.cover,
+          ),
           builder: (context, TransactionProvider provider, Widget? child) {
             if (provider.transactions.isEmpty) {
               return const Center(

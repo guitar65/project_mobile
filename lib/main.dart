@@ -11,14 +11,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) {
-          return TransactionProvider();
-        }),
+        ChangeNotifierProvider(create: (context) => TransactionProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -42,7 +39,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<TransactionProvider>(context, listen: false).initData();
   }
@@ -50,20 +46,52 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          body: TabBarView(
-            children: [
-              HomeScreen(),
-              FormScreen(),
-            ],
-          ),
-          bottomNavigationBar: TabBar(
-            tabs: [
-              Tab(text: "รายการธุรกรรม", icon: Icon(Icons.list),),
-              Tab(text: "เพิ่มข้อมูล", icon: Icon(Icons.add),),
-            ],
-          ),
-        ));
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('My Transactions'),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: TabBarView(
+                children: [
+                  HomeScreen(),
+                  FormScreen(),
+                ],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: Container(
+            color: Colors.black,
+            child: TabBar(
+                tabs: [
+                  Tab(
+                    text: "รายการเพื่อน",
+                    icon: Icon(Icons.favorite, color: Colors.red, size: 30),
+                  ),
+                  Tab(
+                    text: "เพิ่มเพื่อน",
+                    icon: Icon(Icons.star, color: Colors.blue, size: 30),
+                  ),
+                  Tab(
+                    text: "ข้อความ",
+                    icon: Icon(
+                      Icons.chat,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Tab(
+                    text: "ค้นหา",
+                    icon: Icon(Icons.search),
+                  ),
+                ],
+                labelColor: Colors.white, // Set text color for selected tab
+                unselectedLabelColor: const Color.fromARGB(
+                    255, 255, 255, 255), // Set text color for unselected tab
+                indicatorColor: Colors.blue)),
+      ),
+    );
   }
 }
