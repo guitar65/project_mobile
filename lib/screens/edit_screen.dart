@@ -59,7 +59,7 @@ class _EditScreenState extends State<EditScreen> {
                         return 'กรุณากรอกข้อมูลมากกว่า 0';
                       }
                     } catch (e) {
-                      return 'กรุณากรอกข้อมูลเป็นตัวเลข';
+                      return 'กรุณากรอกข้อมูลเป็นตัวเลขนะ';
                     }
                     return null;
                   },
