@@ -55,11 +55,11 @@ class _EditScreenState extends State<EditScreen> {
                   validator: (String? input) {
                     try {
                       double amount = double.parse(input!);
-                      if (amount < 0 ) {
+                      if (amount < 0) {
                         return 'กรุณากรอกข้อมูลมากกว่า 0';
                       }
                     } catch (e) {
-                      return 'กรุณากรอกข้อมูลเป็นตัวเลขนะ';
+                      return 'กรุณากรอกข้อมูลเป็นตัวเลข';
                     }
                     return null;
                   },
