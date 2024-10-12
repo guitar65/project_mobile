@@ -35,7 +35,7 @@ class _EditScreenState extends State<EditScreen> {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'ชื่อรายการ',
+                    labelText: ' กิจกรรมที่ชอบ',
                   ),
                   autofocus: false,
                   controller: titleController,
@@ -43,23 +43,25 @@ class _EditScreenState extends State<EditScreen> {
                     if (str!.isEmpty) {
                       return 'กรุณากรอกข้อมูล';
                     }
+                    return null;
                   },
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'จำนวนเงิน',
+                    labelText: ' เวลา',
                   ),
                   keyboardType: TextInputType.number,
                   controller: amountController,
                   validator: (String? input) {
                     try {
                       double amount = double.parse(input!);
-                      if (amount < 0) {
+                      if (amount < 0 ) {
                         return 'กรุณากรอกข้อมูลมากกว่า 0';
                       }
                     } catch (e) {
                       return 'กรุณากรอกข้อมูลเป็นตัวเลข';
                     }
+                    return null;
                   },
                 ),
                 TextButton(
@@ -84,7 +86,7 @@ class _EditScreenState extends State<EditScreen> {
                             MaterialPageRoute(
                                 fullscreenDialog: true,
                                 builder: (context) {
-                                  return MyHomePage();
+                                  return const MyHomePage();
                                 }));
                       }
                     })

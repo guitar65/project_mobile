@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Colors.black,
           elevation: 0,
-          leading: Icon(
+          leading: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontFamily: "Arial",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.red),
+                color: Color.fromARGB(255, 255, 255, 255)),
           ),
           actions: [
             IconButton(
@@ -50,17 +50,64 @@ class _HomeScreenState extends State<HomeScreen> {
                 SystemNavigator.pop();
               },
             ),
-          ],
+          ], //
         ),
         body: Consumer<TransactionProvider>(
-          child: Image.network(
-            'https://pbs.twimg.com/media/GBxNQk2a8AAAWk3?format=jpg&name=4096x4096', // ใส่ URL รูปโปรไฟล์ที่ต้องการ
-            fit: BoxFit.cover,
-          ),
           builder: (context, TransactionProvider provider, Widget? child) {
             if (provider.transactions.isEmpty) {
-              return const Center(
-                child: Text('ไม่มีรายการ'),
+              return Center(
+                child: SingleChildScrollView(
+                  // ใช้ SingleChildScrollView ครอบเนื้อหา
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          Image.network(
+                            'https://pbs.twimg.com/media/GBxNQk2a8AAAWk3?format=jpg&name=4096x4096',
+                            fit: BoxFit.cover,
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Positioned(
+                            bottom: 180,
+                            left: 0,
+                            right: 0,
+                            child: Container(
+                              color: Colors.black.withOpacity(0.5),
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'pakaphon, 21',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Wrap(
+                                    spacing: 8,
+                                    children: [
+                                      _buildTag('ดื่มบ้าง'),
+                                      _buildTag(' ชอบเที่ยว'),
+                                      _buildTag('เป็นครั้งคราว'),
+                                      _buildTag('ชอบถ่ายรูป'),
+                                      _buildTag('ชวนได้'),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               );
             } else {
               return ListView.builder(
@@ -104,7 +151,22 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           },
         )
+
         // This trailing comma makes auto-formatting nicer for build methods.
         );
+  }
+
+  Widget _buildTag(String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.grey[800],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(color: Colors.white, fontSize: 14),
+      ),
+    );
   }
 }

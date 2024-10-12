@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text('My Transactions'),
         ),
-        body: Column(
+        body: const Column(
           children: [
             Expanded(
               child: TabBarView(
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         bottomNavigationBar: Container(
             color: Colors.black,
-            child: TabBar(
+            child: const TabBar(
                 tabs: [
                   Tab(
                     text: "รายการเพื่อน",
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
                 labelColor: Colors.white, // Set text color for selected tab
-                unselectedLabelColor: const Color.fromARGB(
+                unselectedLabelColor: Color.fromARGB(
                     255, 255, 255, 255), // Set text color for unselected tab
                 indicatorColor: Colors.blue)),
       ),
